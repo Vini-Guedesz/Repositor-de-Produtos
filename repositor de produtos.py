@@ -1,6 +1,7 @@
-lista_produtos = []
+lista_produtos = [{'produto' : 'heiniken', 'quantidade' : 4, 'preço' : 23 },
+                  {'produto' : 'amstel', 'quantidade' : 2, 'preço' : 13 }]
 
-def cadastrar_produto():
+def cadastrar_produtos():
 
 
     produto = input('nome do produto: ')
@@ -35,6 +36,20 @@ def cadastrar_produto():
 
 
 
+def listar_produtos(lista_produtos):
+    print()
+    print('---------------------')
+    lista_produtos_ordenados = sorted(lista_produtos, key=lambda x: x['produto'].lower())
+    
+    for produto in lista_produtos_ordenados:
+        for chave, valor in produto.items():
+                print(f"  {chave.capitalize()}: {valor}")
+        print('---------------------')
+        
+
+
+
+
 def menu():
     print('======================')
     print("[1] Cadastrar Produto")
@@ -48,10 +63,11 @@ def menu():
 
 
 
-
 while True:
     menu()
     opção = int(input('Escolha sua opção: '))
     match opção:    
         case 1:
-            cadastrar_produto()
+            cadastrar_produtos()
+        case 2:
+            listar_produtos(lista_produtos)
