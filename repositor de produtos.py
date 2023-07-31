@@ -69,6 +69,68 @@ def pesquisar():
 
 
 
+def alterar():
+
+    produto = input('Digite o nome do produto: ')
+    
+    for i in lista_produtos:
+        if i['produto'] == produto.lower():
+            print()
+            print("Produto encontrado!!!")
+            print('======================')
+            print("[1] Alterar nome do produto")
+            print("[2] Alterar quantidade do produto")
+            print("[3] Alterar preço do produto")
+            print('======================')
+
+            modificador = int(input('o que alterar no produto?'))
+
+            
+            match modificador:
+                case 1:   
+                    novo_nome = input('digite o novo nome: ')
+                    i['produto'] = novo_nome
+                    print('Produto aterado!!!')
+                    print('---------------------')
+                    for chave, valor in i.items():
+                        print(f"  {chave.capitalize()}: {valor}")
+                    print('---------------------')
+                    break
+                case 2:
+                    while True:
+                        nova_quantidade = input('digite a nova quantidade: ')
+                        if nova_quantidade.isdigit():
+                            i['quantidade'] = nova_quantidade
+                            print('Produto aterado!!!')
+                            print('---------------------')
+                            for chave, valor in i.items():
+                                print(f"  {chave.capitalize()}: {valor}")
+                            print('---------------------')
+                            break
+                        else:
+                            print('digite um valor valido!!!')
+                case 3:
+                    while True:
+                        novo_preço = input('digite a novo preço: ')
+                        if novo_preço.isdigit():
+                            i['preço'] = f"{float(novo_preço):.2f}"
+                            print('Produto aterado!!!')
+                            print('---------------------')
+                            for chave, valor in i.items():
+                                print(f"  {chave.capitalize()}: {valor}")
+                            print('---------------------')
+                            break
+                        else:
+                            print('digite um valor valido!!!')
+                
+        
+    else:
+        print('Produto não encontrado!!!')
+        alterar()
+
+
+
+
 def menu():
     print('======================')
     print("[1] Cadastrar Produto")
@@ -84,11 +146,17 @@ def menu():
 
 while True:
     menu()
-    opção = int(input('Escolha sua opção: '))
-    match opção:    
-        case 1:
-            cadastrar()
-        case 2:
-            listar(lista_produtos)
-        case 3:
-            pesquisar()
+    opção = input('Escolha sua opção: ')
+    if opção.isdigit():
+        opção = int(opção)
+        match opção:    
+            case 1:
+                cadastrar()
+            case 2:
+                listar(lista_produtos)
+            case 3:
+                pesquisar()
+            case 4:
+                alterar()
+    else:
+        print('digite uma opção valida!!!')
