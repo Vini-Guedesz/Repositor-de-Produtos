@@ -52,12 +52,12 @@ def pesquisar():
 
     produto = input('Digite o nome do produto: ')
 
-    for i in lista_produtos:
-        if i['produto'] == produto.lower():
+    for dicionário in lista_produtos:
+        if dicionário['produto'] == produto.lower():
             print()
             print("Produto encontrado!!!")
             print('---------------------')
-            for chave, valor in i.items():
+            for chave, valor in dicionário.items():
                 print(f"  {chave.capitalize()}: {valor}")
             print('---------------------')
             break
@@ -131,6 +131,24 @@ def alterar():
 
 
 
+def remover():
+    produto = input('Digite o nome do produto: ')
+
+    for dicionário in lista_produtos:
+        if dicionário['produto'] == produto.lower():
+            print()
+            print("Produto encontrado!!!")
+            lista_produtos.remove(dicionário)
+            print('Produto deletado!!!')
+            break
+    else:
+        print('Produto não encontrado!!!')
+        pesquisar()
+
+
+
+
+
 def menu():
     print('======================')
     print("[1] Cadastrar Produto")
@@ -160,5 +178,9 @@ while True:
                 pesquisar()
             case 4:
                 alterar()
+            case 5:
+                remover()
+            case 0:
+                break
             case _:
                 print('Digite um valor valido!!!')
