@@ -36,7 +36,7 @@ def cadastrar():
 
 
 
-def listar(lista_produtos):
+def listar():
     print()
     print('---------------------')
     lista_produtos_ordenados = sorted(lista_produtos, key=lambda x: x['produto'].lower())
@@ -147,16 +147,18 @@ def menu():
 while True:
     menu()
     opção = input('Escolha sua opção: ')
-    if opção.isdigit():
+    if not opção.isdigit():
+        print('digite um valor valido!!!')
+    else:
         opção = int(opção)
         match opção:    
             case 1:
                 cadastrar()
             case 2:
-                listar(lista_produtos)
+                listar()
             case 3:
                 pesquisar()
             case 4:
                 alterar()
-    else:
-        print('digite uma opção valida!!!')
+            case _:
+                print('Digite um valor valido!!!')
