@@ -1,11 +1,14 @@
+import time
+import os
+
 lista_produtos = [{'produto' : 'heiniken', 'quantidade' : 4, 'preço' : 23 },
                   {'produto' : 'amstel', 'quantidade' : 2, 'preço' : 13 }]
 
 def cadastrar():
 
+    limpar()
 
     produto = input('nome do produto: ').lower()
-
 
     while True:
         preço = input('preço do produto: ').replace(',' , '')
@@ -14,7 +17,6 @@ def cadastrar():
         else:
             print('digite um valor valido!')
 
-
     while True:
         quantidade = input('quantidade do produto: ')
         if quantidade.isdigit() and int(quantidade) > 0:
@@ -22,16 +24,17 @@ def cadastrar():
         else:
             print('digite um valor valido!')
         
-
     dicionario_produto = {
         'produto' : produto,
         'quantidade' : int(quantidade),
         'preço' : f"{float(preço):.2f}"
     }
     
-
     lista_produtos.append(dicionario_produto)
+
     print('produto registrado com sucesso!!!')
+    carregar()
+    limpar()
 
 
 
@@ -70,8 +73,13 @@ def pesquisar():
 
 
 def alterar():
-
+    limpar()
+    print('======================')
+    print('Alteração de Produto')
+    print('======================')
+    print("Para voltar ao menu, digite [0]!!!")
     produto = input('Digite o nome do produto: ')
+    
     
     for i in lista_produtos:
         if i['produto'] == produto.lower():
@@ -85,7 +93,6 @@ def alterar():
 
             modificador = int(input('o que alterar no produto?'))
 
-            
             match modificador:
                 case 1:   
                     novo_nome = input('digite o novo nome: ')
@@ -122,8 +129,10 @@ def alterar():
                             break
                         else:
                             print('digite um valor valido!!!')
-                
-        
+
+    if int(produto) == 0:
+        carregar()
+        limpar()            
     else:
         print('Produto não encontrado!!!')
         alterar()
@@ -132,6 +141,7 @@ def alterar():
 
 
 def remover():
+
     produto = input('Digite o nome do produto: ')
 
     for dicionário in lista_produtos:
@@ -148,16 +158,30 @@ def remover():
 
 
 
+def limpar():
+    os.system('cls') or None
+
+
+
+
+def carregar():
+    print("Carregando", end="", flush=True)
+    for _ in range(5):
+        print(".", end="", flush=True)
+        time.sleep(0.5)
+
+
+
 
 def menu():
-    print('======================')
-    print("[1] Cadastrar Produto")
-    print("[2] Listar Produtos")
-    print("[3] Pesquisar Produto")
-    print("[4] Alterar Produto")
-    print("[5] Remover Produto")
-    print("[0] Sair do programa")
-    print('======================')
+        print('======================')
+        print("[1] Cadastrar Produto")
+        print("[2] Listar Produtos")
+        print("[3] Pesquisar Produto")
+        print("[4] Alterar Produto")
+        print("[5] Remover Produto")
+        print("[0] Sair do programa")
+        print('======================')
 
 
 
